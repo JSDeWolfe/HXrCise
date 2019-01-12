@@ -4,7 +4,9 @@ import android.app.Service;
 import android.os.IBinder;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.media.MediaPlayer;
+
 
 public class MediaService extends Service {
 

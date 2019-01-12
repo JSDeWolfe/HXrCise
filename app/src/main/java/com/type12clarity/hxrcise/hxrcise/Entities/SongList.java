@@ -16,11 +16,11 @@ public class SongList {
         this._slid = _id;
     }
 
-    public Long get_woid() {
+    public Long get_slid() {
         return _slid;
     }
 
-    public void set_word(String title) {
+    public void set_title(String title) {
         this._title = title;
     }
 
