@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 import zephyr.android.HxMBT.*;
 import com.type12clarity.hxrcise.hxrcise.Services.BTService;
+import com.type12clarity.hxrcise.hxrcise.Services.DBHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     BTService _BTService;
     private final int HEART_RATE = 0x100;
     private final int INSTANT_SPEED = 0x101;
+    private final int DISTANCE = 0x102;
+    private DBHandler dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         this.getApplicationContext().registerReceiver(new BTBondReceiver(), filter2);
         TextView tv = (TextView) findViewById(R.id.TVHR);
         Button btnConnect = (Button) findViewById(R.id.ButtonStart);
+        dbh = DBHandler.getInstance(this);
         if (btnConnect != null) {
             btnConnect.setOnClickListener(new OnClickListener() {
                 public void onClick(View v) {
@@ -59,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }
-
-
                     }
 
                     //BhMacID = btDevice.getAddress();
@@ -187,7 +189,12 @@ public class MainActivity extends AppCompatActivity {
                         String InstantSpeedtext = msg.getData().getString("InstantSpeed");
                         tv = /*(EditText)*/findViewById(R.id.TVSpd);
                         if (tv != null)tv.setText(InstantSpeedtext);
+                        break;
 
+                    case DISTANCE:
+                        String Distancetext = msg.getData().getString("Distance");
+                        tv = /*(EditText)*/findViewById(R.id.TVDist);
+                        if (tv != null)tv.setText(Distancetext);
                         break;
 
                 }

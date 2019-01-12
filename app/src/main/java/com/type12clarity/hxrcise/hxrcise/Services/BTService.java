@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.TextView;
 import zephyr.android.HxMBT.*;
-import zephyr.android.HxMBT.*;
 
 public class BTService extends ConnectListenerImpl
 {
@@ -18,6 +17,7 @@ public class BTService extends ConnectListenerImpl
 
     private final int HEART_RATE = 0x100;
     private final int INSTANT_SPEED = 0x101;
+    private final int DISTANCE = 0x102;
     private HRSpeedDistPacketInfo HRSpeedDistPacket = new HRSpeedDistPacketInfo();
     public BTService(Handler handler,Handler _NewHandler) {
         super(handler, null);
@@ -67,6 +67,13 @@ public class BTService extends ConnectListenerImpl
                     _aNewHandler.sendMessage(text1);
                     System.out.println("Instant Speed is "+ InstantSpeed);
 
+                    //***************Displaying the Distance********************************
+                    double totalDistance = HRSpeedDistPacket.GetDistance(DataArray);
+                    text1 = _aNewHandler.obtainMessage(DISTANCE);
+                    b1.putString("Distance", String.valueOf(totalDistance));
+                    text1.setData(b1);
+                    _aNewHandler.sendMessage(text1);
+                    System.out.println("Distance is "+ totalDistance);
                 }
             }
         });

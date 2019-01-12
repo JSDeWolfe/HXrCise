@@ -20,6 +20,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String COLUMN_WOID = "woid";
     private static final String COLUMN_DATETIME = "datetime";
     private static final String COLUMN_LENGTH = "length";
+    private static final String COLUMN_DISTANCE = "distance";
 
     private static final String TABLE_SEARCHWORDS = "searchwords";
     private static final String COLUMN_WID = "id";
