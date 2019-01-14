@@ -20,8 +20,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
 import zephyr.android.HxMBT.*;
+
+import com.type12clarity.hxrcise.hxrcise.Helpers.MediaMetadata;
 import com.type12clarity.hxrcise.hxrcise.Services.BTService;
 import com.type12clarity.hxrcise.hxrcise.Services.DBHandler;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MediaMetadata mmd = new MediaMetadata(this);
         setContentView(R.layout.activity_main);
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
         this.getApplicationContext().registerReceiver(new BTBroadcastReceiver(), filter);

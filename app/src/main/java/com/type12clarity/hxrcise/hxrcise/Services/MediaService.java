@@ -1,12 +1,16 @@
 package com.type12clarity.hxrcise.hxrcise.Services;
 
 import android.app.Service;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.IBinder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.media.MediaPlayer;
-
+//https://stackoverflow.com/questions/6832522/playing-audio-from-mediastore-on-a-media-player-android
 
 public class MediaService extends Service {
 
@@ -19,9 +23,11 @@ public class MediaService extends Service {
     /** indicates whether onRebind should be used */
     boolean mAllowRebind;
 
+    MediaPlayer mp;
+
     @Override
     public void onCreate() {
-
+        mp = new MediaPlayer();
     }
 
     @Override
@@ -47,6 +53,10 @@ public class MediaService extends Service {
     @Override
     public void onDestroy() {
 
+    }
+
+    public void getAllTracks(Context context) {
+        return;
     }
 
 }
