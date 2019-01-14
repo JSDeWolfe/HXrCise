@@ -1,5 +1,10 @@
 package com.type12clarity.hxrcise.hxrcise;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.lang.reflect.InvocationTargetException;
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getReadPerm();
         MediaMetadata mmd = new MediaMetadata(this);
         setContentView(R.layout.activity_main);
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
@@ -131,9 +137,38 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        TextView uritv = (TextView) findViewById(R.id.TVUri);
+        uritv.setText(String.valueOf(mmd.getURI().size()));
     }
 
-        private class BTBondReceiver extends BroadcastReceiver {
+    private void getReadPerm() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    private class BTBondReceiver extends BroadcastReceiver {
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle b = intent.getExtras();
