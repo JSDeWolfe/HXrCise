@@ -76,5 +76,25 @@
         app:layout_constraintRight_toRightOf="parent"
         />
 
+    <Button
+        android:id="@+id/ButtonMPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MPlay" />
+
+    <Button
+        android:id="@+id/ButtonMStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonMPlay"
+        android:text="MStop" />
+
+    <Button
+        android:id="@+id/ButtonMSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/ButtonMStop"
+        android:text="MSwitch" />
+
 
 </android.support.constraint.ConstraintLayout>

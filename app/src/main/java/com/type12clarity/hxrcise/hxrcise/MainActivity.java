@@ -10,7 +10,6 @@ import android.os.Bundle;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
-
 import android.R.*;
 import android.bluetooth.*;
 import android.content.BroadcastReceiver;
@@ -29,6 +28,8 @@ import zephyr.android.HxMBT.*;
 import com.type12clarity.hxrcise.hxrcise.Helpers.MediaMetadata;
 import com.type12clarity.hxrcise.hxrcise.Services.BTService;
 import com.type12clarity.hxrcise.hxrcise.Services.DBHandler;
+import com.type12clarity.hxrcise.hxrcise.Helpers.Buttons;
+import com.type12clarity.hxrcise.hxrcise.Services.MediaService;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,12 +42,13 @@ public class MainActivity extends AppCompatActivity {
     private final int INSTANT_SPEED = 0x101;
     private final int DISTANCE = 0x102;
     private DBHandler dbh;
+    String currentSongPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getReadPerm();
-        MediaMetadata mmd = new MediaMetadata(this);
+        final MediaMetadata mmd = new MediaMetadata(this);
         setContentView(R.layout.activity_main);
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
         this.getApplicationContext().registerReceiver(new BTBroadcastReceiver(), filter);
@@ -138,7 +140,43 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         TextView uritv = (TextView) findViewById(R.id.TVUri);
-        uritv.setText(String.valueOf(mmd.getURI().size()));
+        uritv.setText(String.valueOf(mmd.getURI().get(2)));
+        currentSongPath = String.valueOf(mmd.getURI().get(2));
+        Button btnMPlay = (Button) findViewById(R.id.ButtonMPlay);
+        if (btnMPlay != null) {
+            btnMPlay.setOnClickListener(new OnClickListener() {
+                @Override
+
+                public void onClick(View v) {
+                    startService(new Intent(this, mmd.getURI().get(2)));
+
+                }
+            });
+        }
+        Button btnMStop = (Button) findViewById(R.id.ButtonMStop);
+        if (btnMStop != null) {
+            btnMStop.setOnClickListener(new OnClickListener() {
+                @Override
+
+                public void onClick(View v) {
+
+
+                }
+            });
+        }
+
+        Button btnMSwitch = (Button) findViewById(R.id.ButtonMSwitch);
+        if (btnMSwitch != null) {
+            btnMSwitch.setOnClickListener(new OnClickListener() {
+                @Override
+
+                public void onClick(View v) {
+
+
+                }
+            });
+        }
+
     }
 
     private void getReadPerm() {
