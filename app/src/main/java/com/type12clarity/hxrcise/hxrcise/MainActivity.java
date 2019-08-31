@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getReadPerm();
-        final MediaMetadata mmd = new MediaMetadata(this);
         setContentView(R.layout.activity_main);
         IntentFilter filter = new IntentFilter("android.bluetooth.device.action.PAIRING_REQUEST");
         this.getApplicationContext().registerReceiver(new BTBroadcastReceiver(), filter);
